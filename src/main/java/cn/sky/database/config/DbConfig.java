@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "datasource")
 public class DbConfig {
 
-    private String originalFile;
+    private String datasetFile;
 
     private int fileSize;
+
+    private String repositoryPath;
 
 }

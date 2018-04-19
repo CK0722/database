@@ -1,6 +1,7 @@
 import cn.sky.database.Application;
 import cn.sky.database.config.DbConfig;
 import cn.sky.database.util.CsvUtil;
+import cn.sky.database.util.DbUtil;
 import com.opencsv.CSVReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,11 +24,20 @@ public class UtilTests {
     private DbConfig dbConfig;
 
     @Test
-    public void testReadCsvFile(){
-        String originalFile = dbConfig.getOriginalFile();
+    public void testReadCsvFile() {
+        String originalFile = dbConfig.getDatasetFile();
         try {
             CSVReader csvReader = CsvUtil.readFile(originalFile);
             CsvUtil.print(csvReader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testSplitDataSet() {
+        try {
+            DbUtil.splitDataSet(dbConfig.getDatasetFile(), dbConfig.getRepositoryPath(), dbConfig.getFileSize());
         } catch (IOException e) {
             e.printStackTrace();
         }
