@@ -17,8 +17,11 @@ public class DbConfig {
 
     private String datasetFile;
 
+    private String repositoryPath;
+
     private int fileSize;
 
-    private String repositoryPath;
+    private int threadPoolSize;
+
 
 }

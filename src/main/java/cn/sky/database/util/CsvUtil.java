@@ -2,6 +2,7 @@ package cn.sky.database.util;
 
 import cn.sky.database.constant.BusinessEnum;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
@@ -19,9 +20,25 @@ import java.util.List;
 public class CsvUtil {
 
     public static CSVReader readFile(String fileName) throws IOException {
-        FileReader fileReader = new FileReader(fileName);
+        File file = new File(fileName);
+        if (!file.exists()) {
+            return null;
+        }
+
+        FileReader fileReader = new FileReader(file);
         CSVReader csvReader = new CSVReader(fileReader, '\t');
         return csvReader;
+    }
+
+    public static List<String[]> readContents(String fileName) throws IOException {
+        CSVReader reader = readFile(fileName);
+        if (null == reader) {
+            return Lists.newArrayList();
+        }
+
+        reader.readNext();
+        List<String[]> contents = reader.readAll();
+        return contents;
     }
 
     public static boolean writeFile(String fileName, List<String[]> contents) throws IOException {
@@ -31,9 +48,19 @@ public class CsvUtil {
             file.createNewFile();
         }
         FileWriter fileWriter = new FileWriter(file);
-        CSVWriter csvWriter = new CSVWriter(fileWriter,'\t');
+        CSVWriter csvWriter = new CSVWriter(fileWriter, '\t');
         csvWriter.writeAll(contents);
         return true;
+    }
+
+    public static int getFileCount(String dbPath) {
+        File file = new File(dbPath);
+        if (!file.exists() || !file.isDirectory()) {
+            System.err.println("sorry: the specified path:" + dbPath + " of the dbFile does not exits.");
+            return 0;
+        }
+        File[] files = file.listFiles();
+        return files.length;
     }
 
 
@@ -55,5 +82,6 @@ public class CsvUtil {
             ++row;
         }
     }
+
 
 }
