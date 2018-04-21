@@ -5,11 +5,13 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class CsvUtil {
     public static CSVReader readFile(String fileName) throws IOException {
         File file = new File(fileName);
         if (!file.exists()) {
-            return null;
+            throw new RuntimeException("sorry: the file:" + fileName + " dose not exits!");
         }
 
         FileReader fileReader = new FileReader(file);
@@ -42,7 +44,7 @@ public class CsvUtil {
     }
 
     public static boolean writeFile(String fileName, List<String[]> contents) throws IOException {
-        File file = new File(fileName + ".csv");
+        File file = new File(fileName);
         if (!file.exists()) {
             file.getParentFile().mkdir();
             file.createNewFile();
@@ -52,6 +54,32 @@ public class CsvUtil {
         csvWriter.writeAll(contents);
         return true;
     }
+
+    public static List<String> readContentsByLineNumer(String fileName, List<Integer> rows) throws IOException {
+        CSVReader csvReader = readFile(fileName);
+        csvReader.readNext();           //ignore the file header
+
+        int maxRow = 1;
+        for (Integer row : rows) {
+            if (row > maxRow) {
+                maxRow = row;
+            }
+        }
+
+        List<String> targets = new ArrayList<>(rows.size());
+        for (int i = 1; i <= maxRow; ++i) {
+            String[] data = csvReader.readNext();
+            if (null == data || 0 == data.length) {
+                break;
+            }
+
+            if (rows.contains(i)) {
+                targets.add(StringUtils.join(data, " "));
+            }
+        }
+        return targets;
+    }
+
 
     public static int getFileCount(String dbPath) {
         File file = new File(dbPath);

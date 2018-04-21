@@ -1,5 +1,6 @@
 import cn.sky.database.Application;
 import cn.sky.database.config.DbConfig;
+import cn.sky.database.constant.BusinessEnum;
 import cn.sky.database.util.CsvUtil;
 import cn.sky.database.util.DbUtil;
 import com.opencsv.CSVReader;
@@ -38,6 +39,24 @@ public class UtilTests {
     public void testSplitDataSet() {
         try {
             DbUtil.splitDataSet(dbConfig.getDatasetFile(), dbConfig.getRepositoryPath(), dbConfig.getFileSize());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testCreateBnameIndex() {
+        try {
+            DbUtil.createIndex(dbConfig.getRepositoryPath(), BusinessEnum.BN_NAME.getField(), dbConfig.getIndexPath(), dbConfig.getIndexTableSize());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testCreateAbnIndex() {
+        try {
+            DbUtil.createIndex(dbConfig.getRepositoryPath(), BusinessEnum.BN_ABN.getField(), dbConfig.getIndexPath(), dbConfig.getIndexTableSize());
         } catch (IOException e) {
             e.printStackTrace();
         }

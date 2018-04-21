@@ -19,7 +19,11 @@ public class DbConfig {
 
     private String repositoryPath;
 
+    private String indexPath;
+
     private int fileSize;
+
+    private int indexTableSize;
 
     private int threadPoolSize;
 
