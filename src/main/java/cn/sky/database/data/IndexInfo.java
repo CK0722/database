@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * data structure describing index information
+ *
  * @author Sky
  * @date 2018/4/21 上午11:24
  */
@@ -16,8 +18,14 @@ import java.util.List;
 public class IndexInfo implements Serializable {
     private static final long serialVersionUID = -3284879889186446978L;
 
-
+    /**
+     * the specified value
+     */
     private String value;
+
+    /**
+     * a set records the index information
+     */
     private List<IndexItem> items;
 
     public IndexInfo() {
@@ -39,7 +47,14 @@ public class IndexInfo implements Serializable {
     public static class IndexItem implements Serializable {
         private static final long serialVersionUID = -2410945364046324694L;
 
+        /**
+         * the page number of a specified value in the dataset
+         */
         private int pageNum;
+
+        /**
+         * the row number of a specified value in a specified page in the dataset
+         */
         private int row;
 
         public IndexItem(int pageNum, int row) {

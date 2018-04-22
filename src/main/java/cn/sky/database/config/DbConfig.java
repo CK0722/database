@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ * data structure describing the config information of the database
  * @author Sky
  * @date 2018/4/18 下午1:07
  */

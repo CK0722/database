@@ -14,11 +14,24 @@ public class ThreadUtil {
 
     }
 
+    /**
+     * get a specified size of the thread pool which can execute runnable or callable tasks asynchronously
+     *
+     * @param threadPoolSize
+     * @return
+     */
     public static final ExecutorService getExecutorService(int threadPoolSize) {
         ThreadPoolExecutor executor = ThreadPoolHolder.executorService;
         executor.setCorePoolSize(threadPoolSize);
         executor.setMaximumPoolSize(threadPoolSize);
         return executor;
+    }
+
+    /**
+     * shutdown the thread pool
+     */
+    public static final void shutdown() {
+        ThreadPoolHolder.shutdown();
     }
 
     private static final class ThreadPoolHolder {
@@ -29,6 +42,12 @@ public class ThreadUtil {
             ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 1L, TimeUnit.SECONDS,
                     new LinkedBlockingDeque<>(1024), threadFactory);
             return executor;
+        }
+
+        private static void shutdown() {
+            if (null != executorService) {
+                executorService.shutdown();
+            }
         }
     }
 }

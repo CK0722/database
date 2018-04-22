@@ -21,17 +21,12 @@ import java.util.List;
  */
 public class CsvUtil {
 
-    public static CSVReader readFile(String fileName) throws IOException {
-        File file = new File(fileName);
-        if (!file.exists()) {
-            throw new RuntimeException("sorry: the file:" + fileName + " dose not exits!");
-        }
 
-        FileReader fileReader = new FileReader(file);
-        CSVReader csvReader = new CSVReader(fileReader, '\t');
-        return csvReader;
-    }
-
+    /**
+     * @param fileName
+     * @return a set of the main contents of the specified file that will ignore the header
+     * @throws IOException
+     */
     public static List<String[]> readContents(String fileName) throws IOException {
         CSVReader reader = readFile(fileName);
         if (null == reader) {
@@ -43,6 +38,15 @@ public class CsvUtil {
         return contents;
     }
 
+
+    /**
+     * save the contents into the specified file
+     *
+     * @param fileName
+     * @param contents
+     * @return
+     * @throws IOException
+     */
     public static boolean writeFile(String fileName, List<String[]> contents) throws IOException {
         File file = new File(fileName);
         if (!file.exists()) {
@@ -55,6 +59,15 @@ public class CsvUtil {
         return true;
     }
 
+
+    /**
+     * read records of fixed line numbers and will ignore the file header
+     *
+     * @param fileName
+     * @param rows     a set of line numbers
+     * @return a set of records of fixed line numbers
+     * @throws IOException
+     */
     public static List<String> readContentsByLineNumer(String fileName, List<Integer> rows) throws IOException {
         CSVReader csvReader = readFile(fileName);
         csvReader.readNext();           //ignore the file header
@@ -81,10 +94,16 @@ public class CsvUtil {
     }
 
 
-    public static int getFileCount(String dbPath) {
-        File file = new File(dbPath);
+    /**
+     * the number of files in the absolute directory
+     *
+     * @param path a absolute directory
+     * @return
+     */
+    public static int getFileCount(String path) {
+        File file = new File(path);
         if (!file.exists() || !file.isDirectory()) {
-            System.err.println("sorry: the specified path:" + dbPath + " of the dbFile does not exits.");
+            System.err.println("sorry: the specified file path:" + path + " does not exits.");
             return 0;
         }
         File[] files = file.listFiles();
@@ -92,6 +111,11 @@ public class CsvUtil {
     }
 
 
+    /**
+     * print the data in the CSVReader
+     *
+     * @param csvReader
+     */
     public static void print(CSVReader csvReader) {
         Iterator<String[]> iterator = csvReader.iterator();
         int row = 1;
@@ -109,6 +133,22 @@ public class CsvUtil {
 
             ++row;
         }
+    }
+
+    /**
+     * @param fileName the name of the file
+     * @return a reader of csv file type
+     * @throws IOException
+     */
+    public static CSVReader readFile(String fileName) throws IOException {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            throw new RuntimeException("sorry: the file:" + fileName + " dose not exits!");
+        }
+
+        FileReader fileReader = new FileReader(file);
+        CSVReader csvReader = new CSVReader(fileReader, '\t');
+        return csvReader;
     }
 
 

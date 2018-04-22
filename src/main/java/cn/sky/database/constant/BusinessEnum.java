@@ -1,6 +1,8 @@
 package cn.sky.database.constant;
 
 /**
+ * data structure describing valid columns in the dataset
+ *
  * @author Sky
  * @date 2018/4/18 下午2:30
  */
