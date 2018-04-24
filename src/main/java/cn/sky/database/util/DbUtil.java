@@ -68,7 +68,7 @@ public class DbUtil {
     /**
      * search data in dataset without index
      *
-     * @param column      the name of the column has been indexed
+     * @param column      the column name of the dataset
      * @param targetValue the value to be searched
      * @param dbPath      the absolute path of the dataset which has been split
      * @param threadSize  the maximum number of threads to search data
@@ -83,7 +83,6 @@ public class DbUtil {
         ExecutorService executorService = ThreadUtil.getExecutorService(threadSize);
         CountDownLatch downLatch = new CountDownLatch(threadSize);
 
-        long start = System.currentTimeMillis();
         List<Future<List<String[]>>> futures = new ArrayList<>(threadSize + 1);
         Future<List<String[]>> future = null;
         for (int i = 1; i <= threadSize; ++i) {
@@ -107,9 +106,6 @@ public class DbUtil {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        long end = System.currentTimeMillis();
-        System.out.println("query " + businessEnum.getField() + "=" + targetValue + " without index cost:" + (end - start) / 1000.0 + " seconds.");
 
         ArrayList<String> res = Lists.newArrayList();
         futures.forEach(f -> {
