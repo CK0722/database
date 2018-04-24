@@ -34,7 +34,7 @@ public class DbUtil {
      * @param datasetPath the absolute path of the dataset
      * @param dbPath      the absolute path of the repository
      * @param fileSize    the maximun number of recordes in each file
-     * @return the number of the files in the repository
+     * @return the maximum row of the records in each file of the repository
      * @throws IOException
      */
     public static int splitDataSet(String datasetPath, String dbPath, int fileSize) throws IOException {
