@@ -43,6 +43,6 @@ public class IndexController {
         System.out.println("args[0]: the absolute path of the repository.");
         System.out.println("args[1]: the absolute path of the index file.");
         System.out.println("args[2]: the column name of the dataset(such as bn_name,bn_abn,etc.)");
-        System.out.println("args[3]: the maximum capcity of the index table.");
+        System.out.println("args[3]: the maximum capcity of the index table(such as 10000).");
     }
 }

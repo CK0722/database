@@ -188,7 +188,7 @@ public class DbUtil {
         targets.forEach(t -> {
             System.out.println("find target: " + t);
         });
-        System.out.println("find the target:" + targetValue + " cost " + (end - start) + " ms.");
+        System.out.println("find the target:" + targetValue + " successfully and it costs " + (end - start) + " ms.");
         return targets;
     }
 

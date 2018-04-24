@@ -9,6 +9,8 @@ B. run code:
     1.split the dataset into different files:
         java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/SplitDataController absoluteDataSetFilePath absoluteRepositoryPath rows
     2.create index based on the specified column of the dataset:
-        java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/IndexController absoluteRepositoryPath absoluteIndexPath column capcity
+        java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/IndexController absoluteRepositoryPath absoluteIndexPath column indexTableSize
     3.query data without index:
         java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/QueryWithoutIndexController  absoluteRepositoryPath column value threadSize
+    4.query data with index:
+        java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/QueryDataWithIndexController  absoluteRepositoryPath absoluteIndexPath column value indexTableSize
