@@ -224,7 +224,6 @@ public class DbUtil {
             return false;
         }
 
-        long start = System.currentTimeMillis();
         List<List<IndexInfo>> indexs = new ArrayList<>(capcity);
         for (int i = 0; i < capcity; ++i) {
             indexs.add(new ArrayList<>(16));
@@ -272,8 +271,6 @@ public class DbUtil {
         oos.flush();
         oos.close();
 
-        long end = System.currentTimeMillis();
-        System.out.println("create the index of " + column + " cost:" + (end - start) / 1000 + " seconds.");
         return true;
     }
 
@@ -345,7 +342,7 @@ public class DbUtil {
      * @return a valid column enum or NULL
      */
     private static BusinessEnum checkColumn(String column) {
-        BusinessEnum businessEnum = BusinessEnum.valueOf(column);
+        BusinessEnum businessEnum = BusinessEnum.valueOf(column.toUpperCase());
         if (null == businessEnum) {
             System.err.println("sorry: the specified column dose not exits.");
             System.err.println("the exits value are: " + BusinessEnum.values().toString());

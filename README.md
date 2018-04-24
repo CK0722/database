@@ -7,4 +7,6 @@ A. get code:
 
 B. run code:
     1.split the dataset into different files:
-        java -Djava.ext.dirs=mvnRepositoryPath/com/opencsv/opencsv/3.10  cn/sky/database/controller/SplitDataController absoluteDataSetFilePath absoluteRepositoryPath rows
+        java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/SplitDataController absoluteDataSetFilePath absoluteRepositoryPath rows
+    2.create index based on the specified column of the dataset:
+        java -Djava.ext.dirs=mvnRepositoryPath  cn/sky/database/controller/IndexController absoluteRepositoryPath absoluteIndexPath column capcity
